@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import {writeFileSync} from "fs"
 
 export async function url2pdf(url: string): Promise<string>{
-  const pdf = await saveAsPdf(url);
+  const pdf = await saveAsPdf(atob(url));
   const path = '/app/files/file.pdf';
   writeFileSync(path, pdf)
   return path;
