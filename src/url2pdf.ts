@@ -1,14 +1,6 @@
 import puppeteer from 'puppeteer';
-import {writeFileSync} from "fs"
 
-export async function url2pdf(url: string): Promise<string>{
-  const pdf = await saveAsPdf(atob(url));
-  const path = '/app/files/file.pdf';
-  writeFileSync(path, pdf)
-  return path;
-}
-
-const saveAsPdf = async (url: string) => {
+export async function url2pdf(url: string): Promise<Buffer>{
   const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
   const page = await browser.newPage();
 
@@ -23,5 +15,5 @@ const saveAsPdf = async (url: string) => {
   await browser.close();
 
   return result;
-};
+}
 
